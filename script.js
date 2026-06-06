@@ -853,7 +853,7 @@ const baseQuestions = [
     ],
     correctIndex: 3
   }
-    {
+  {
     id: 72,
     type: "single",
     question: "Саша крут?",
