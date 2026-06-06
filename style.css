@@ -1,22 +1,22 @@
 :root {
-  --bg: #0f172a;           /* Тёмный фон страницы */
-  --card: #1e293b;         /* Фон карточек (чуть светлее) */
-  --text: #f8fafc;         /* Светлый текст */
-  --muted: #94a3b8;        /* Приглушенный текст */
-  --border: #334155;       /* Границы элементов */
-  --primary: #f8fafc;      /* Основные кнопки (инверсия) */
-  --primary-text: #0f172a; /* Текст на основных кнопках */
-  --secondary-btn: #334155;/* Второстепенные кнопки */
-  --question-bg: #1e293b;  /* Блок с текстом вопроса */
-  --letter-bg: #334155;    /* Кружочки с буквами вариантов (A, B, C...) */
-  --letter-text: #cbd5e1;  /* Текст внутри кружочков */
-  --shadow: rgba(0, 0, 0, 0.35); /* Глубокая тень для темной темы */
+  --bg: #121212;             /* Глубокий темно-серый фон страницы (как в Google) */
+  --card: #1f1f1f;           /* Фон карточек (чуть светлее фона страницы) */
+  --text: #e8eaed;           /* Светло-серый основной текст Google */
+  --muted: #9aa0a6;          /* Приглушенный серый текст Google */
+  --border: #3c4043;         /* Цвет границ разделов и карточек */
+  --primary: #e8eaed;        /* Основной цвет акцентных кнопок */
+  --primary-text: #121212;   /* Текст на основных кнопках */
+  --secondary-btn: #303134;  /* Второстепенные темные кнопки */
+  --question-bg: #28292a;    /* Блок с текстом вопроса */
+  --letter-bg: #3c4043;      /* Кружочки с буквами вариантов (A, B, C...) */
+  --letter-text: #e8eaed;    /* Текст внутри кружочков */
+  --shadow: rgba(0, 0, 0, 0.5); /* Плотная темная тень */
   
-  /* Мягкие цвета для правильных/неправильных ответов */
-  --green: #22c55e;
-  --green-border: #16a34a;
-  --red: #ef4444;
-  --red-border: #dc2626;
+  /* Спокойные, не выжигающие глаза цвета ответов для темной темы */
+  --green: #137333;          /* Приглушенный зеленый Google */
+  --green-border: #1e8e3e;
+  --red: #c5221f;            /* Приглушенный красный Google */
+  --red-border: #d93025;
 }
 
 * { box-sizing: border-box; }
@@ -54,12 +54,35 @@ body {
 .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
 .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
 
+/* Фикс для маленьких карточек (особенно если это <button>) */
 .small-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px;
+  background: var(--card); 
+  border: 1px solid var(--border); 
+  border-radius: 18px; 
+  padding: 16px;
+  color: var(--text);          /* Перебиваем черный цвет браузера */
+  font-family: inherit;        /* Перебиваем стандартный шрифт кнопок */
+  text-align: left;            /* Выравниваем текст по левому краю */
+}
+
+/* Стиль для кликабельной карточки ошибок */
+.clickable-card {
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.clickable-card:hover:not(:disabled) {
+  background-color: var(--secondary-btn);
+  border-color: var(--muted);
+}
+/* Если ошибок 0 — карточка аккуратно тускнеет */
+.small-card:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .stat-label { font-size: 14px; color: var(--muted); }
-.stat-value { font-size: 30px; font-weight: 700; margin-top: 10px; }
+.stat-value { font-size: 30px; font-weight: 700; margin-top: 10px; color: var(--text); }
 .btn-row { display:flex; gap: 12px; flex-wrap: wrap; }
 
 .btn {
@@ -71,6 +94,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   font-weight: 600;
+  font-family: inherit;
 }
 
 .btn.secondary {
@@ -104,22 +128,22 @@ body {
 
 .option-btn {
   width: 100%; text-align: left; background: var(--card); border: 1px solid var(--border); border-radius: 18px;
-  padding: 16px; font-size: 16px; cursor: pointer; color: var(--text);
+  padding: 16px; font-size: 16px; cursor: pointer; color: var(--text); font-family: inherit;
 }
 
-.option-btn:hover:not(:disabled) { border-color: var(--muted); }
-.option-btn.correct { background: var(--green); border-color: var(--green-border); color: white; }
-.option-btn.wrong { background: var(--red); border-color: var(--red-border); color: white; }
+.option-btn:hover:not(:disabled) { border-color: var(--muted); background: var(--secondary-btn); }
+.option-btn.correct { background: var(--green); border-color: var(--green-border); color: #ffffff; }
+.option-btn.wrong { background: var(--red); border-color: var(--red-border); color: #ffffff; }
 .option-inner { display:flex; gap: 12px; align-items:flex-start; }
 
 .option-letter {
   width: 28px; height: 28px; border-radius: 999px; background: var(--letter-bg); color: var(--letter-text); display:flex; align-items:center; justify-content:center; font-size: 13px; font-weight: 700; flex-shrink: 0;
 }
 
-/* Кружочки букв внутри отвеченных вопросов */
+/* Цвета букв при правильном/неправильном ответе */
 .option-btn.correct .option-letter, .option-btn.wrong .option-letter { 
-  background: rgba(255,255,255,0.92); 
-  color: #0f172a; 
+  background: #ffffff; 
+  color: #121212; 
 }
 
 .progress-wrap { margin-top: 10px; }
@@ -136,7 +160,7 @@ body {
 
 .select {
   width: 100%; border: 1px solid var(--border); border-radius: 14px; padding: 12px; font-size: 15px;
-  background: var(--card); color: var(--text);
+  background: var(--card); color: var(--text); font-family: inherit;
 }
 
 .match-result { margin-top: 10px; font-size: 14px; }
