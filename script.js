@@ -971,7 +971,6 @@ function renderHome() {
             <div class="stat-value">${state.mistakes.length}</div>
             <div class="muted" style="margin-top:8px;font-size:13px;">Нажми, чтобы прорешать</div>
           </button>
-          <div class="small-card"><div class="stat-label">Режим</div><div class="stat-value" style="font-size:22px;">Подготовка</div></div>
         </div>
 
         <div class="grid grid-2" style="margin-top:16px;">
