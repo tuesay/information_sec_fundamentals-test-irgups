@@ -958,7 +958,6 @@ function renderHome() {
     <div class="container">
       <div class="card">
         <div class="title-row">
-          <div class="icon-box">📚</div>
           <div>
             <h1 style="margin:0;font-size:36px;">Тест по основам информационной безопасности</h1>
             <p class="muted" style="margin:6px 0 0;">71 вопрос</p>
